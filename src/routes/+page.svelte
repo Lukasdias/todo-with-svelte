@@ -1,4 +1,5 @@
 <script>
+	import '../global.css';
 	let count = 0;
 
 	function addCount() {
