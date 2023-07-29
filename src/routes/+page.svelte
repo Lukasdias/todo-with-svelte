@@ -11,12 +11,10 @@
 		count = 0;
 	}
 
-	import Count from './+count.svelte';
+	import Count from '../components/count.svelte';
 </script>
 
-<main class="w-screen h-screen bg-slate-900 flex justify-center text-center items-center">
-	<section class="flex flex-col gap-4">
-		<h1 class="text-white">Hello Svelte World</h1>
-		<Count {count} {addCount} {minusCount} {clearCount} />
-	</section>
-</main>
+<section class="flex flex-col gap-4">
+	<h1 class="text-white">Hello Svelte World</h1>
+	<Count {count} {addCount} {minusCount} {clearCount} />
+</section>
