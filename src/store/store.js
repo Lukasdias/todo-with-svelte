@@ -10,9 +10,9 @@ function todo() {
 		remove: (id) => update((todos) => todos.filter((todo) => todo.id !== id)),
 		toggle: (id) =>
 			update((todos) =>
-				todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
+				todos.map((todo) => (todo.id === id ? { ...todo, done : !todo.done } : todo))
 			),
-		reset: () => set([])
+		reset: () => set([]),
 	};
 }
 

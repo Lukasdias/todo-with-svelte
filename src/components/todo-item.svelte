@@ -1,8 +1,10 @@
 <script>
 	// @ts-nocheck
 	import { fade } from 'svelte/transition';
+	import { todos } from '../store/store';
 	export let text = 'test-todo-component';
 	export let done = false;
+	export let index = ' ';
 	let show = true;
 </script>
 
@@ -18,7 +20,7 @@
 				checked={done}
 				class="h-6 w-6 rounded-md border-2 border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple-dark focus:ring-opacity-50"
 				on:change={() => {
-					done = !done;
+					todos.toggle(index);
 				}}
 			/>
 			<span class="text-white font-bold">{text}</span>
