@@ -1,53 +1,50 @@
 <script>
 	// @ts-nocheck
 
+	import { v4 as uuidv4 } from 'uuid';
+
 	import { todos } from './../store/store';
 	let tempTodo = {
+		id: 0,
 		text: '',
 		done: false
 	};
+	function pushTodo() {
+		if (tempTodo.text === '') return;
+		todos.add({
+			id: uuidv4(),
+			text: tempTodo.text,
+			done: false
+		});
+		tempTodo.text = '';
+	}
+	let plus = '/plus.svg';
 </script>
 
-<div class=" flex gap-3 -top-8 left-1/2 transform -translate-x-1/2 absolute">
+<div class=" flex gap-3 -top-8 left-1/2 transform -translate-x-1/2 absolute w-full">
 	<input
 		type="text"
 		placeholder="Adicione uma nova tarefa"
-		value={tempTodo.text}
-		class="bg-gray-800 text-white p-4 rounded-md w-30 border-transparent focus:outline-none focus:ring-2 focus:ring-brand-purple-dark focus:ring-opacity-50 border-none focus:border-none focus-within:outline-none duration-200 transition-all"
-		on:change={(e) => {
-			tempTodo.text = e.target.value;
-		}}
+		class="bg-brand-gray-500 w-full text-white p-4 rounded-md ring-offset-2 ring-0 ring-offset-transparent ring-transparent focus:ring-offset-brand-purple outline-none transition-all duration-200 focus:ring-2 focus:ring-brand-purple focus:outline-none focus:border-transparent"
+		bind:value={tempTodo.text}
 		on:keydown={(e) => {
 			if (e.key === 'Enter') {
 				if (e.target.value === '') return;
-				todos.add(e.target.value);
+				pushTodo();
 				e.target.value = '';
 			}
 		}}
 	/>
 
 	<button
-		class="rounded-2xl p-2 bg-brand-purple flex gap-2 justify-center items-center hover:bg-brand-purple-dark transition-colors duration-200"
+		class="rounded-2xl p-4 bg-brand-blue-dark flex justify-center items-center hover:bg-brand-blue transition-colors duration-200"
 		on:click={() => {
 			if (tempTodo.text === '') return;
-			todos.add(tempTodo.text);
+			pushTodo();
 			tempTodo.text = '';
 		}}
 	>
-		<span class="text-white font-bold">Adicionar</span>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			class="h-6 w-6 text-white"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-			/>
-		</svg>
+		<span class="text-white font-bold">Criar</span>
+		<img src={plus} alt="plus" class="w-6 ml-2" />
 	</button>
 </div>

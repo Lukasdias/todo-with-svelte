@@ -12,7 +12,8 @@ function todo() {
 			update((todos) =>
 				todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
 			),
-		reset: () => set([])
+		reset: () => set([]),
+		getDone: () => subscribe((todos) => todos.filter((todo) => todo.done))
 	};
 }
 

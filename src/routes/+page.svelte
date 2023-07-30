@@ -1,20 +1,19 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import Input from '../components/input.svelte';
-	import TodoItem from '../components/todo-item.svelte';
+	import TodoList from '../components/todo-list.svelte';
+	import Wrapper from '../components/wrapper.svelte';
 	import '../global.css';
-	import { todos } from './../store/store';
 	let visible = true;
 </script>
 
 {#if visible}
-	<section class="flex flex-col gap-4 flex-1 justify-center items-center relative" transition:fade>
-		<Input />
-		{#if $todos.length === 0}
-			<p class="text-2xl text-white font-bold">No todos</p>
-		{/if}
-		{#each $todos as todo}
-			<TodoItem text={todo.text} done={todo.done} />
-		{/each}
+	<section class="flex flex-col gap-4 flex-1 relative w-full h-full items-center" transition:fade>
+		<Wrapper>
+			<Input />
+		</Wrapper>
+		<Wrapper>
+			<TodoList />
+		</Wrapper>
 	</section>
 {/if}
