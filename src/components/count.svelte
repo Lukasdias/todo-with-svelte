@@ -1,8 +1,15 @@
 <script>
-	export let count;
-	export let addCount;
-	export let minusCount;
-	export let clearCount;
+	let count = 0;
+
+	function addCount() {
+		count += 1;
+	}
+	function minusCount() {
+		count -= 1;
+	}
+	function clearCount() {
+		count = 0;
+	}
 </script>
 
 <h2 class="text-white">Count: {count}</h2>

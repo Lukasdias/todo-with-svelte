@@ -1,21 +1,20 @@
 <script>
+	import { fade } from 'svelte/transition';
+	import Input from '../components/input.svelte';
+	import TodoItem from '../components/todo-item.svelte';
 	import '../global.css';
-	let count = 0;
-
-	function addCount() {
-		count += 1;
-	}
-	function minusCount() {
-		count -= 1;
-	}
-	function clearCount() {
-		count = 0;
-	}
-
-	import Count from '../components/count.svelte';
+	import { todos } from './../store/store';
+	let visible = true;
 </script>
 
-<section class="flex flex-col gap-4">
-	<h1 class="text-white">Hello Svelte World</h1>
-	<Count {count} {addCount} {minusCount} {clearCount} />
-</section>
+{#if visible}
+	<section class="flex flex-col gap-4 flex-1 justify-center items-center relative" transition:fade>
+		<Input />
+		{#if $todos.length === 0}
+			<p class="text-2xl text-white font-bold">No todos</p>
+		{/if}
+		{#each $todos as todo}
+			<TodoItem text={todo.text} done={todo.done} />
+		{/each}
+	</section>
+{/if}
